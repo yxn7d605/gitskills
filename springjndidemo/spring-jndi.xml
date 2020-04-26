@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+            http://www.springframework.org/schema/context
+            http://www.springframework.org/schema/context/spring-context-4.3.xsd
+            http://www.springframework.org/schema/mvc
+            http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd ">
+    <bean id="configEnv" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <property name="locations" value="classpath:config-jndi.properties"/>
+    </bean>
+
+    <bean id="jndiTemplate" class="org.springframework.jndi.JndiTemplate">
+        <property name="environment" ref="configEnv"/>
+<!--        <property name="environment">-->
+<!--            <props>-->
+<!--                <prop key="java.naming.factory.initial">jndi.ConfigInitialContextFactory</prop>-->
+<!--                <prop key="java.naming.factory.object">jndi.ConfigObjectFactory</prop>-->
+<!--                <prop key="config.server.zookeeper.name">zookeeper</prop>-->
+<!--                <prop key="config.server.zookeeper.sources">192.168.0.15:2181</prop>-->
+<!--                <prop key="config.server.mysql.name">mysql</prop>-->
+<!--                <prop key="config.server.mysql.sources">192.168.0.15:3306</prop>-->
+<!--            </props>-->
+<!--        </property>-->
+    </bean>
+
+    <bean id="zookeeperConfig" class="org.springframework.jndi.JndiObjectFactoryBean">
+        <property name="jndiTemplate" ref="jndiTemplate" />
+        <property name="jndiName" value="server/zookeeper"/>
+    </bean>
+
+    <bean id="mysqlConfig" class="org.springframework.jndi.JndiObjectFactoryBean">
+        <property name="jndiTemplate" ref="jndiTemplate" />
+        <property name="jndiName" value="server/mysql"/>
+    </bean>
+</beans>
