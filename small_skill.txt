@@ -27,3 +27,19 @@ git pull --rebase
     可以有两种解决方案：
     1> 配置hosts文件，配置方法为在hosts文件中新增一行：ip hostname。ip为本机ip，hostname为通过命令hostname查询出来的值
     2> 通过遍历网卡的形式来获取ip，源码可以百度
+
+6. centos7配置jdk
+   1> 下载jdk，jdk-8u251-linux-x64.tar.gz
+   2> 复制jdk-8u251-linux-x64.tar.gz到/usr/java目录中
+   3> 解压：tar -zxvf jdk-8u251-linux-x64.tar.gz
+   4> 配置profile文件，vi /etc/profile
+   5> 在profile文件的最后加入如下代码：
+      export JAVA_HOME=/usr/java/jdk1.8.0_251
+      export CLASSPATH=.:$JAVA_HOME/jre/lib/rt.jar:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
+      export PATH=$PATH:$JAVA_HOME/bin
+   6> 执行source /etc/profile
+   7> 验证是否安装成功：java -version
+
+7. centos7配置hostname
+   临时修改：hostname 新的hostname
+   永久修改：修改文件/etc/hostname，修改完之后使用systemctl restart systemd-hostnamed重启
