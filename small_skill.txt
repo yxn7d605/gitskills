@@ -43,3 +43,11 @@ git pull --rebase
 7. centos7配置hostname
    临时修改：hostname 新的hostname
    永久修改：修改文件/etc/hostname，修改完之后使用systemctl restart systemd-hostnamed重启
+
+8. 配置yum仓库
+   1> 下载阿里repo，http://mirrors.aliyun.com/repo/Centos-7.repo
+   2> 备份现有的repo，mv CentOS-Base.repo CentOS-Base.repo.backup
+   3> 将阿里repo重命名为CentOS-Base.repo，并且复制到/etc/yum.repos.d目录中
+   4> 清除默认的缓存包，yum clean all
+   5> yum makecache
+   6> yum update
