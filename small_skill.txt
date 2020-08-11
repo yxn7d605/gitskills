@@ -52,6 +52,6 @@ git pull --rebase
    5> yum makecache
    6> yum update
    
-9. 删除git远程分支
+9. 删除git远程分支df
    // dev是要删除的分支
    git push origin --delete dev
