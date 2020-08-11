@@ -51,3 +51,7 @@ git pull --rebase
    4> 清除默认的缓存包，yum clean all
    5> yum makecache
    6> yum update
+   
+9. 删除git远程分支
+   // dev是要删除的分支
+   git push origin --delete dev
