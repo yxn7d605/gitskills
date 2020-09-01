@@ -1,8 +1,11 @@
 package com.yx.home.ss.configuration;
 
+import com.yx.home.ss.filter.MyAuthenticationFailureHandler;
+import com.yx.home.ss.filter.VerificationCodeFilter;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -11,9 +14,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         httpSecurity.authorizeRequests()
                 .antMatchers("/admin/api/**").hasRole("ADMIN")
                 .antMatchers("/user/api/**").hasRole("USER")
-                .antMatchers("/app/api/**").permitAll()
+                .antMatchers("/app/api/**", "/kaptcha/captcha.jpg").permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .formLogin();
+                .csrf().disable()
+                .formLogin()
+                .loginPage("/myLogin.html")
+                .loginProcessingUrl("/auth/form").permitAll()
+                .failureHandler(new MyAuthenticationFailureHandler());
+        httpSecurity.addFilterBefore(new VerificationCodeFilter(), UsernamePasswordAuthenticationFilter.class);
     }
 }
