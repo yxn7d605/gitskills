@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>登录</title>
+</head>
+<body>
+    <form action="/auth/form" method="post">
+        <input type="text" name="username" placeholder="username" />
+        <input type="password" name="password" placeholder="password" />
+        <input type="text" name="captcha" placeholder="captcha" /><img src="/kaptcha/captcha.jpg" height="50px" width="150px">
+        <input type="submit" value="Login" />
+    </form>
+</body>
+</html>
