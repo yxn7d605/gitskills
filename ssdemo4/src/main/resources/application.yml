@@ -1,0 +1,10 @@
+security:
+  cas:
+    server:
+      host: https://cas.my.cn:8443/cas
+      login: ${security.cas.server.host}/login
+      logout: ${security.cas.server.host}/logout
+    service:
+      host: http://client.cas.my.cn:8080
+      login: /login/cas
+      logout: /logout
