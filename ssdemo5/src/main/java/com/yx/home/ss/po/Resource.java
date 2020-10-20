@@ -1,15 +1,8 @@
 package com.yx.home.ss.po;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
 import java.util.Date;
 
-@Table(name = "resource")
 public class Resource {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY,generator = "JDBC")
     private Long id;
 
     private String code;
@@ -18,9 +11,7 @@ public class Resource {
 
     private String uri;
 
-    private String permissionCode;
-
-    private Integer status;
+    private String reqMethod;
 
     private String createdBy;
 
@@ -62,20 +53,12 @@ public class Resource {
         this.uri = uri;
     }
 
-    public String getPermissionCode() {
-        return permissionCode;
+    public String getReqMethod() {
+        return reqMethod;
     }
 
-    public void setPermissionCode(String permissionCode) {
-        this.permissionCode = permissionCode;
-    }
-
-    public Integer getStatus() {
-        return status;
-    }
-
-    public void setStatus(Integer status) {
-        this.status = status;
+    public void setReqMethod(String reqMethod) {
+        this.reqMethod = reqMethod;
     }
 
     public String getCreatedBy() {

@@ -1,30 +1,17 @@
 package com.yx.home.ss.po;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
 import java.util.Date;
 
-@Table(name = "role")
 public class Role {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY,generator = "JDBC")
     private Long id;
 
     private String code;
 
     private String name;
 
-    private String deptCode;
-
-    private String deptName;
-
-    private String orgCode;
-    
-    private String orgName;
-
     private String orgTcode;
+
+    private String description;
 
     private Integer status;
 
@@ -60,44 +47,20 @@ public class Role {
         this.name = name;
     }
 
-    public String getDeptCode() {
-        return deptCode;
-    }
-
-    public void setDeptCode(String deptCode) {
-        this.deptCode = deptCode;
-    }
-
-    public String getDeptName() {
-        return deptName;
-    }
-
-    public void setDeptName(String deptName) {
-        this.deptName = deptName;
-    }
-
-    public String getOrgCode() {
-        return orgCode;
-    }
-
-    public void setOrgCode(String orgCode) {
-        this.orgCode = orgCode;
-    }
-
-    public String getOrgName() {
-        return orgName;
-    }
-
-    public void setOrgName(String orgName) {
-        this.orgName = orgName;
-    }
-
     public String getOrgTcode() {
         return orgTcode;
     }
 
     public void setOrgTcode(String orgTcode) {
         this.orgTcode = orgTcode;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Integer getStatus() {

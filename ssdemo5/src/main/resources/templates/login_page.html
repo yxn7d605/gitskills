@@ -7,7 +7,7 @@
     <script src="https://cdn.staticfile.org/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
-<form class="login-page" action="/form" method="post">
+<form class="login-page" action="/login" method="post">
     <div class="form">
         <h3>账户登录</h3>
         <input type="text" placeholder="用户名" name="username" required="required"/>
@@ -23,7 +23,7 @@
         let password = $("input[name = 'password']");
         $.ajax({
             type: "POST",
-            url: "/form",
+            url: "/login",
             data: {
                 "username": username.val(),
                 "password": password.val(),

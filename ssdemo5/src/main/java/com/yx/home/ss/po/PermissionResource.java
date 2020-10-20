@@ -2,12 +2,12 @@ package com.yx.home.ss.po;
 
 import java.util.Date;
 
-public class UserRole {
+public class PermissionResource {
     private Long id;
 
-    private String oaCode;
+    private String permissionCode;
 
-    private String roleCode;
+    private String resourceCode;
 
     private String createdBy;
 
@@ -25,20 +25,20 @@ public class UserRole {
         this.id = id;
     }
 
-    public String getOaCode() {
-        return oaCode;
+    public String getPermissionCode() {
+        return permissionCode;
     }
 
-    public void setOaCode(String oaCode) {
-        this.oaCode = oaCode;
+    public void setPermissionCode(String permissionCode) {
+        this.permissionCode = permissionCode;
     }
 
-    public String getRoleCode() {
-        return roleCode;
+    public String getResourceCode() {
+        return resourceCode;
     }
 
-    public void setRoleCode(String roleCode) {
-        this.roleCode = roleCode;
+    public void setResourceCode(String resourceCode) {
+        this.resourceCode = resourceCode;
     }
 
     public String getCreatedBy() {

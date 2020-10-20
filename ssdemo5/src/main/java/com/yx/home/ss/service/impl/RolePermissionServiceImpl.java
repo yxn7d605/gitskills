@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -21,5 +22,18 @@ public class RolePermissionServiceImpl implements RolePermissionService {
         List<RolePermission> rolePermissions = rolePermissionMapper.selectByExample(example);
 
         return rolePermissions;
+    }
+
+    @Override
+    public List<String> queryPermissionsByRoleCodes(List<String> roleCodes) {
+        List<RolePermission> rolePermissions = queryRolePermissionsByRoleCodes(roleCodes);
+        List<String> permissions = new ArrayList<>(rolePermissions.size());
+        if (rolePermissions != null && !rolePermissions.isEmpty()) {
+            for (RolePermission rolePermission : rolePermissions) {
+                permissions.add(rolePermission.getPermissionCode());
+            }
+        }
+
+        return permissions;
     }
 }
