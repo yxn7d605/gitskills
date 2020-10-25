@@ -5,13 +5,15 @@ public class LoginUserInfo {
 
     public static final String STATUS = "status";
 
-    public static final String LOGIN_CNT = "login_cnt";
+    public static final String CUR_ID = "cur_id";
 
     private String oaCode;
 
+    private String password;
+
     private Integer stauts;
 
-    private Integer loginCnt;
+    private String curId;
 
     public String getOaCode() {
         return oaCode;
@@ -19,6 +21,14 @@ public class LoginUserInfo {
 
     public void setOaCode(String oaCode) {
         this.oaCode = oaCode;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public Integer getStauts() {
@@ -29,11 +39,11 @@ public class LoginUserInfo {
         this.stauts = stauts;
     }
 
-    public Integer getLoginCnt() {
-        return loginCnt;
+    public String getCurId() {
+        return curId;
     }
 
-    public void setLoginCnt(Integer loginCnt) {
-        this.loginCnt = loginCnt;
+    public void setCurId(String curId) {
+        this.curId = curId;
     }
 }

@@ -32,8 +32,6 @@ public class JwtUserLoginServiceImpl implements UserLoginService {
 
     private static final int REFRESH_MINUS = 5;
 
-    private static final String TOKEN_NAME = "access_token";
-
     private String parseTokenFromRequest(HttpServletRequest request) {
         Cookie[] cookies = request.getCookies();
         if (cookies != null && cookies.length > 0) {
@@ -83,7 +81,7 @@ public class JwtUserLoginServiceImpl implements UserLoginService {
         Map<String, Object> claimMap = new HashMap<>();
         claimMap.put(LoginUserInfo.OA_CODE, loginUserInfo.getOaCode());
         claimMap.put(LoginUserInfo.STATUS, loginUserInfo.getStauts());
-        claimMap.put(LoginUserInfo.LOGIN_CNT, loginUserInfo.getLoginCnt());
+        claimMap.put(LoginUserInfo.CUR_ID, loginUserInfo.getCurId());
 
         return claimMap;
     }
@@ -133,7 +131,7 @@ public class JwtUserLoginServiceImpl implements UserLoginService {
         LoginUserInfo loginUserInfo = new LoginUserInfo();
         loginUserInfo.setOaCode((String) claimMap.get(LoginUserInfo.OA_CODE));
         loginUserInfo.setStauts((Integer) claimMap.get(LoginUserInfo.STATUS));
-        loginUserInfo.setLoginCnt((Integer) claimMap.get(LoginUserInfo.LOGIN_CNT));
+        loginUserInfo.setCurId((String) claimMap.get(LoginUserInfo.CUR_ID));
 
         return loginUserInfo;
     }
