@@ -5,6 +5,8 @@ public interface RedisService {
 
     public void set(String key, Object value);
 
+    public void set(String key, Object value, long timeout);
+
     /**
      * 递增
      *

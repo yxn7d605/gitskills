@@ -1,6 +1,5 @@
-package com.yx.home.ss.service.impl;
+package com.yx.home.ss.filter;
 
-import com.yx.home.ss.bo.JwtAuthenticationToken;
 import com.yx.home.ss.bo.LoginUserInfo;
 import com.yx.home.ss.service.UserLoginService;
 import org.slf4j.Logger;
@@ -19,8 +18,11 @@ public class JwtAuthenticationProvider implements AuthenticationProvider {
 
     private UserDetailsService userDetailsService;
 
-    public JwtAuthenticationProvider(UserLoginService userLoginService, UserDetailsService userDetailsService) {
+    public void setUserLoginService(UserLoginService userLoginService) {
         this.userLoginService = userLoginService;
+    }
+
+    public void setUserDetailsService(UserDetailsService userDetailsService) {
         this.userDetailsService = userDetailsService;
     }
 

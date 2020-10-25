@@ -1,5 +1,7 @@
 package com.yx.home.ss.filter;
 
+import com.yx.home.ss.bo.LoginUserInfo;
+import com.yx.home.ss.config.LoginUserContextHolder;
 import com.yx.home.ss.utils.JsonUtils;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -56,6 +58,12 @@ public class JsonUsernamePasswordAuthenticationFilter extends AbstractAuthentica
 
         // Allow subclasses to set the "details" property
         setDetails(request, authRequest);
+
+        // 构建登录信息
+        LoginUserInfo loginUserInfo = new LoginUserInfo();
+        loginUserInfo.setOaCode(userName);
+        loginUserInfo.setPassword(userPassword);
+        LoginUserContextHolder.setLoginUserInfo(loginUserInfo);
 
         return this.getAuthenticationManager().authenticate(authRequest);
     }

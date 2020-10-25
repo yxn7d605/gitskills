@@ -18,6 +18,10 @@ public class RedisServiceImpl implements RedisService {
         redisTemplate.opsForValue().set(key, value);
     }
 
+    public void set(String key, Object value, long timeout) {
+        redisTemplate.opsForValue().set(key, value, timeout);
+    }
+
     public long incr(String key, long n) {
         return redisTemplate.opsForValue().increment(key);
     }

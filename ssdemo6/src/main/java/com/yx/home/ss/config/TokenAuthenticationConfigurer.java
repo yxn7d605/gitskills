@@ -1,6 +1,8 @@
 package com.yx.home.ss.config;
 
+import com.yx.home.ss.filter.JsonUsernamePasswordAuthenticationFilter;
 import com.yx.home.ss.filter.TokenAuthenticationFilter;
+import com.yx.home.ss.service.UserLoginService;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.HttpSecurityBuilder;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -21,5 +23,11 @@ public class TokenAuthenticationConfigurer<T extends TokenAuthenticationConfigur
 
         TokenAuthenticationFilter filter = postProcess(authenticationFilter);
         builder.addFilterBefore(filter, LogoutFilter.class);
+    }
+
+    public TokenAuthenticationConfigurer<T, B> permissiveRequestUris(String... uris) {
+        authenticationFilter.setPermissiveUris(uris);
+
+        return this;
     }
 }

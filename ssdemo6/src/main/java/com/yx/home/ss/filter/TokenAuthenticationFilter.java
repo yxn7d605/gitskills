@@ -1,8 +1,9 @@
 package com.yx.home.ss.filter;
 
 import com.auth0.jwt.exceptions.JWTVerificationException;
-import com.yx.home.ss.bo.JwtAuthenticationToken;
+import com.sun.javafx.scene.control.skin.VirtualFlow;
 import com.yx.home.ss.service.UserLoginService;
+import com.yx.home.ss.utils.CookieUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -15,7 +16,8 @@ import org.springframework.security.web.authentication.AuthenticationFailureHand
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
-import org.springframework.util.Assert;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.security.web.util.matcher.RequestMatcher;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
@@ -23,6 +25,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 拦截器获取jwt token
@@ -32,23 +36,24 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
 
     private AuthenticationManager authenticationManager;
 
+    private List<RequestMatcher> permissiveRequestMatchers;
+
     private AuthenticationSuccessHandler successHandler = new SavedRequestAwareAuthenticationSuccessHandler();
     private AuthenticationFailureHandler failureHandler = new SimpleUrlAuthenticationFailureHandler();
-
-    // 处理登录事项
-    private UserLoginService userLoginService;
-
-    public void setTokenService(UserLoginService userLoginService) {
-        this.userLoginService = userLoginService;
-    }
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         Authentication authResult = null;
         AuthenticationException failed = null;
         try {
-            String token = userLoginService.parseToken(request);
+            // 配置不需要token验证的url
+            if (isPermissiveRequest(request)) {
+                filterChain.doFilter(request, response);
 
+                return;
+            }
+
+            String token = CookieUtils.getCookieValue(UserLoginService.TOKEN_NAME, request.getCookies());
             if (token == null) {
                 // 未登录
                 LOGGER.error("LoginTokenAuthenticationFilter->doFilterInternal user have not login");
@@ -107,5 +112,29 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
 
     public void setAuthenticationFailureHandler(AuthenticationFailureHandler failureHandler) {
         this.failureHandler = failureHandler;
+    }
+
+    private boolean isPermissiveRequest(HttpServletRequest request) {
+        if (permissiveRequestMatchers == null) {
+            return false;
+        }
+
+        for (RequestMatcher requestMatcher : permissiveRequestMatchers) {
+            if (requestMatcher.matches(request)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public void setPermissiveUris(String... uris) {
+        if (permissiveRequestMatchers == null) {
+            permissiveRequestMatchers = new ArrayList<>(uris.length);
+        }
+
+        for (String uri : uris) {
+            permissiveRequestMatchers.add(new AntPathRequestMatcher(uri));
+        }
     }
 }

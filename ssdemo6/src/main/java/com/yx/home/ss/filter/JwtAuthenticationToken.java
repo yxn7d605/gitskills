@@ -1,4 +1,4 @@
-package com.yx.home.ss.bo;
+package com.yx.home.ss.filter;
 
 import com.auth0.jwt.interfaces.DecodedJWT;
 import org.springframework.security.authentication.AbstractAuthenticationToken;

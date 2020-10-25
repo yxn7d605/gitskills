@@ -5,6 +5,8 @@ import com.yx.home.ss.bo.LoginUserInfo;
 import javax.servlet.http.HttpServletRequest;
 
 public interface UserLoginService {
+    public static final String TOKEN_NAME = "access_token";
+
     /**
      * 判断用户是否是登录用户，目前的判断是是否携带了token
      *

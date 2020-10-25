@@ -4,6 +4,7 @@ import com.yx.home.ss.filter.JsonUsernamePasswordAuthenticationFilter;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.HttpSecurityBuilder;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.logout.LogoutFilter;
 import org.springframework.security.web.authentication.session.NullAuthenticatedSessionStrategy;
 
@@ -18,10 +19,15 @@ public class JsonLoginHttpConfigurer<T extends JsonLoginHttpConfigurer<T, B>, B 
     public void configure(B builder) throws Exception {
         authenticationFilter.setAuthenticationManager(builder.getSharedObject(AuthenticationManager.class));
         authenticationFilter.setAuthenticationFailureHandler(new LoginAuthenticationFailureHandler());
-        authenticationFilter.setAuthenticationSuccessHandler(new LoginAuthenticationSuccessHandler());
         authenticationFilter.setSessionAuthenticationStrategy(new NullAuthenticatedSessionStrategy());
 
         JsonUsernamePasswordAuthenticationFilter filter = postProcess(authenticationFilter);
         builder.addFilterAfter(filter, LogoutFilter.class);
+    }
+
+    public JsonLoginHttpConfigurer<T, B> loginAuthenticationSuccessHandler(AuthenticationSuccessHandler authenticationSuccessHandler) {
+        authenticationFilter.setAuthenticationSuccessHandler(authenticationSuccessHandler);
+
+        return this;
     }
 }

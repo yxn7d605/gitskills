@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Service
-public class JwtUserLoginServiceImpl implements UserLoginService {
+public class UserLoginServiceImpl implements UserLoginService {
     private static final String ALG = "HS256";
 
     private static final String TYP = "JWT";
