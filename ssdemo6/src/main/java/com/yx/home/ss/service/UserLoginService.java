@@ -2,6 +2,7 @@ package com.yx.home.ss.service;
 
 import com.yx.home.ss.bo.LoginUserInfo;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
 public interface UserLoginService {
@@ -42,10 +43,10 @@ public interface UserLoginService {
     /**
      * 生成一个新的token
      *
-     * @param loginUserInfo
+     * @param oaCode
      * @return
      */
-    public String createToken(LoginUserInfo loginUserInfo);
+    public String createToken(String oaCode);
 
     /**
      * 获取登录用户最新信息，建议从缓存中获取
@@ -63,11 +64,5 @@ public interface UserLoginService {
      */
     public LoginUserInfo parseLoginUserInfo(String token);
 
-    /**
-     * 刷新token
-     *
-     * @param token
-     * @return
-     */
-    public String refreshToken(String token);
+    Cookie createTokenCookie(String token);
 }

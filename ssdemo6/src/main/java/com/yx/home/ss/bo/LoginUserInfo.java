@@ -5,7 +5,7 @@ public class LoginUserInfo {
 
     public static final String STATUS = "status";
 
-    public static final String CUR_ID = "cur_id";
+    public static final String LOGIN_ID = "login_id";
 
     private String oaCode;
 
@@ -13,7 +13,7 @@ public class LoginUserInfo {
 
     private Integer stauts;
 
-    private String curId;
+    private String loginId;
 
     public String getOaCode() {
         return oaCode;
@@ -39,11 +39,11 @@ public class LoginUserInfo {
         this.stauts = stauts;
     }
 
-    public String getCurId() {
-        return curId;
+    public String getLoginId() {
+        return loginId;
     }
 
-    public void setCurId(String curId) {
-        this.curId = curId;
+    public void setLoginId(String loginId) {
+        this.loginId = loginId;
     }
 }

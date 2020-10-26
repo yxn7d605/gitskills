@@ -6,6 +6,8 @@ import com.yx.home.ss.utils.CookieUtils;
 import com.yx.home.ss.utils.JsonUtils;
 import com.yx.home.ss.utils.JwtUitls;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 import javax.servlet.ServletException;
@@ -28,7 +30,10 @@ public class LoginAuthenticationSuccessHandler implements AuthenticationSuccessH
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
         response.setContentType("application/json;charset=UTF-8");
-//        String token = userLoginService.createToken();
+        UserDetails principal = (UserDetails) authentication.getPrincipal();
+        String token = userLoginService.createToken(principal.getUsername());
+        Cookie cookie = userLoginService.createTokenCookie(token);
+        response.addCookie(cookie);
         PrintWriter printWriter = response.getWriter();
         printWriter.write(JsonUtils.obj2Json(ResponseMode.success(), false));
         printWriter.flush();

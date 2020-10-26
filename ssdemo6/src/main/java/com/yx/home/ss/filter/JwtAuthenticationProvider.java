@@ -34,14 +34,10 @@ public class JwtAuthenticationProvider implements AuthenticationProvider {
             throw new NonceExpiredException("token expires");
         } else {
             LoginUserInfo loginUserInfo = userLoginService.parseLoginUserInfo(token);
-            loginUserInfo = userLoginService.queryLoginUserInfo(loginUserInfo.getOaCode());
-            UserDetails userDetails = userDetailsService.loadUserByUsername(loginUserInfo.getOaCode());
-            if (userLoginService.isNeedRefreshToken(token)) {
-                // 是否需要刷新token
-                token = userLoginService.createToken(loginUserInfo);
-            }
+//            loginUserInfo = userLoginService.queryLoginUserInfo(loginUserInfo.getOaCode());
+//            UserDetails userDetails = userDetailsService.loadUserByUsername(loginUserInfo.getOaCode());
 
-            JwtAuthenticationToken jwtAuthenticationToken = new JwtAuthenticationToken(userDetails, token, userDetails.getAuthorities());
+            JwtAuthenticationToken jwtAuthenticationToken = new JwtAuthenticationToken(token);
 
             return jwtAuthenticationToken;
         }
