@@ -12,7 +12,10 @@ public enum ResponseWrapper {
     USER_NOT_FOUND("001002", "用户不存在"),
 
     INPUT_PARAM_ERROR("001003", "参数错误"),
-    ;
+
+    TOKEN_VERIFY_FAIL("001004", "token过期或无效"),
+
+    USER_STATUS_WRONG("001005", "用户状态无效");
 
     private String code;
 

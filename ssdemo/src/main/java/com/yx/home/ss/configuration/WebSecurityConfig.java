@@ -12,7 +12,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeRequests()
-                .antMatchers("/admin/api/**").hasRole("ADMIN")
+                .antMatchers("/admin/api/**").permitAll()
                 .antMatchers("/user/api/**").hasRole("USER")
                 .antMatchers("/app/api/**", "/kaptcha/captcha.jpg").permitAll()
                 .anyRequest().authenticated()

@@ -32,16 +32,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .csrf().disable()
                 .formLogin().disable()
-                .sessionManagement().disable()
-                .cors()
-                .and()
-                .apply(new JsonLoginHttpConfigurer<>()).loginAuthenticationSuccessHandler(jsonLoginAuthenticationSuccessHandler())
-                .and()
-                .apply(new TokenAuthenticationConfigurer<>()).permissiveRequestUris("/login")
-                .and()
-                .logout()
-                .and()
                 .sessionManagement().disable();
+//                .cors()
+//                .and()
+//                .apply(new JsonLoginHttpConfigurer<>()).loginAuthenticationSuccessHandler(jsonLoginAuthenticationSuccessHandler())
+//                .and()
+//                .apply(new TokenAuthenticationConfigurer<>()).permissiveRequestUris("/login")
+//                .and()
+//                .logout()
+//                .and()
+//                .sessionManagement().disable();
     }
 
     @Override

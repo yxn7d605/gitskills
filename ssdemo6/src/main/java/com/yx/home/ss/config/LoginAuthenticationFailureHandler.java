@@ -4,6 +4,8 @@ import com.yx.home.ss.common.ResponseMode;
 import com.yx.home.ss.common.ResponseWrapper;
 import com.yx.home.ss.utils.JsonUtils;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.DisabledException;
+import org.springframework.security.authentication.InsufficientAuthenticationException;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
@@ -26,6 +28,10 @@ public class LoginAuthenticationFailureHandler implements AuthenticationFailureH
             responseMode = ResponseMode.fail(ResponseWrapper.USER_PWD_ERROR);
         } else if (exception instanceof UsernameNotFoundException) {
             responseMode = ResponseMode.fail(ResponseWrapper.USER_NOT_FOUND);
+        } else if (exception instanceof InsufficientAuthenticationException) {
+            responseMode = ResponseMode.fail(ResponseWrapper.FAILURE);
+        } else if (exception instanceof DisabledException) {
+            responseMode = ResponseMode.fail(ResponseWrapper.FAILURE);
         } else {
             responseMode = ResponseMode.fail(ResponseWrapper.LOGIN_FAIL);
         }

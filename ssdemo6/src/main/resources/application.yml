@@ -14,15 +14,15 @@ spring:
       max-lifetime: 1800000
       connection-timeout: 30000
       connection-test-query: SELECT 1
-  redis:
-    host: 127.0.0.1
-    port: 6379
-    lettuce:
-      pool:
-        max-idle: 10
-        min-idle: 0
-        max-active: 100
-        max-wait: -1ms
+#  redis:
+#    host: 127.0.0.1
+#    port: 6379
+#    lettuce:
+#      pool:
+#        max-idle: 10
+#        min-idle: 0
+#        max-active: 100
+#        max-wait: -1ms
   thymeleaf:
     prefix: classpath:/templates/
     suffix: .html

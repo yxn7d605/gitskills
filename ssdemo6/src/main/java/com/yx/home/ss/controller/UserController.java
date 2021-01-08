@@ -1,6 +1,7 @@
 package com.yx.home.ss.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -11,11 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 @RestController
 @RequestMapping("/user")
 public class UserController {
-    @GetMapping("/hello")
+    @PostMapping("/hello")
     public String hello(String name, HttpServletResponse response) {
-        Cookie cookie = new Cookie("token", "wwwwwwwweeeeeeeeeeeeeiiiiiii");
-        cookie.setMaxAge(-1);
-        response.addCookie(cookie);
+        System.out.println(name);
 
         return "hello";
     }
